@@ -17,15 +17,16 @@ np.random.seed()
 
 def generate_stations(min_dist=150, count=3):
     stations = []
+    margin = 250
     while len(stations) < count:
-        candidate = np.random.uniform(low=[xmin, ymin], high=[xmax, ymax])
+        candidate = np.random.uniform(low=[xmin + margin, ymin + margin], high=[xmax - margin, ymax - margin])
         if all(np.linalg.norm(candidate - s) >= min_dist for s in stations):
             stations.append(candidate)
     return stations
 
 # Generate station and aircraft positions
 master, slave_a, slave_b = generate_stations()
-margin = 100
+margin = 250
 aircraft = np.random.uniform(
     low=[xmin + margin, ymin + margin],
     high=[xmax - margin, ymax - margin]
@@ -127,7 +128,7 @@ def animate(frame):
     if t >= t_master_arrival:
         master_back_circle.set_radius(dist_master)
         master_tri_circle.set_radius(dist_master)
-        label_lines.append(f"Master Δt: {t_master_arrival:.2f} ms ∴ {c*t_master_arrival:.2f} km away")
+        label_lines.append(f"Master Δt: {t_master_arrival:.2f} ms ∴ {c*t_master_arrival:.0f} km away")
     else:
         master_back_circle.set_radius(0)
         master_tri_circle.set_radius(0)
@@ -136,7 +137,7 @@ def animate(frame):
     if t >= t_slave_a_arrival:
         slave_a_back_circle.set_radius(dist_slave_a)
         slave_a_tri_circle.set_radius(dist_slave_a)
-        label_lines.append(f"Slave A Δt: {(t_slave_a_arrival - t_slave_a_emit):.2f} ms ∴ {c*(t_slave_a_arrival - t_slave_a_emit):.2f} km away")
+        label_lines.append(f"Slave A Δt: {(t_slave_a_arrival - t_slave_a_emit):.2f} ms ∴ {c*(t_slave_a_arrival - t_slave_a_emit):.0f} km away")
     else:
         slave_a_back_circle.set_radius(0)
         slave_a_tri_circle.set_radius(0)
@@ -145,7 +146,7 @@ def animate(frame):
     if t >= t_slave_b_arrival:
         slave_b_back_circle.set_radius(dist_slave_b)
         slave_b_tri_circle.set_radius(dist_slave_b)
-        label_lines.append(f"Slave B Δt: {t_slave_b_arrival - t_slave_b_emit:.2f} ms ∴ {c*(t_slave_b_arrival - t_slave_b_emit):.2f} km away")
+        label_lines.append(f"Slave B Δt: {t_slave_b_arrival - t_slave_b_emit:.2f} ms ∴ {c*(t_slave_b_arrival - t_slave_b_emit):.0f} km away")
     else:
         slave_b_back_circle.set_radius(0)
         slave_b_tri_circle.set_radius(0)
