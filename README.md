@@ -1,5 +1,7 @@
 # GEE Navigation System – Visualized
 
+![GEE Animation](gee_animation.gif)
+
 This project demonstrates how the World War II-era **GEE hyperbolic navigation system** works, using two Python scripts:
 - `animation.py` – animated signal propagation and triangulation
 - `static.py` – static visualization showing GEE range circles

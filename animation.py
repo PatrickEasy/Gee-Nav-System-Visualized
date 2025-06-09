@@ -170,3 +170,8 @@ def animate(frame):
 ani = animation.FuncAnimation(fig, animate, frames=150, interval=50, blit=True)
 plt.show()
 
+# Save
+# Note: Saving as GIF can be slow and large; commented out for by default
+# Uncomment the next line to save the animation as a GIF
+#ani.save("gee_animation.gif", writer='pillow', fps=20)
+
