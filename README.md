@@ -135,15 +135,6 @@ Example:
 
 ---
 
-## 🧩 Future Enhancements (optional ideas)
-
-* Draw **true hyperbolic lines of position**
-* Add **oscilloscope waveform simulation**
-* Export visuals to image/PDF
-* Add a **CLI tool** to input manual Δt values
-
----
-
 ## 📜 License
 
 MIT License. Free for educational and research use.
