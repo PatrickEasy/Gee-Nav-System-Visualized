@@ -1,6 +1,3 @@
-### 📄 `README.md`
-
-````markdown
 # GEE Navigation System – Visualized
 
 This project demonstrates how the World War II-era **GEE hyperbolic navigation system** works, using two Python scripts:
@@ -154,6 +151,3 @@ MIT License. Free for educational and research use.
 ```
 
 ---
-
-Let me know if you’d like this auto-generated into a file or need to add example images or mathematical derivations.
-```
