@@ -25,7 +25,7 @@ def generate_stations(min_dist=150, count=3):
 
 # Generate station and aircraft positions
 master, slave_a, slave_b = generate_stations()
-margin = 50
+margin = 100
 aircraft = np.random.uniform(
     low=[xmin + margin, ymin + margin],
     high=[xmax - margin, ymax - margin]
@@ -65,6 +65,8 @@ slave_a_point, = ax.plot(*slave_a, 'go', label="Slave A")
 slave_b_point, = ax.plot(*slave_b, 'bo', label="Slave B")
 aircraft_dot, = ax.plot([], [], 'kx', label="Aircraft")
 aircraft_label = ax.text(aircraft[0] + 20, aircraft[1] + 20, "", fontsize=9)
+slave_a_label = ax.text(slave_a[0] + 20, slave_a[1] + 20, "", fontsize=9, color='green')
+slave_b_label = ax.text(slave_b[0] + 20, slave_b[1] + 20, "", fontsize=9, color='blue')
 
 # Expanding pulse circles
 master_circle = plt.Circle(master, 0, color='r', fill=False)
@@ -125,7 +127,7 @@ def animate(frame):
     if t >= t_master_arrival:
         master_back_circle.set_radius(dist_master)
         master_tri_circle.set_radius(dist_master)
-        label_lines.append(f"Master Δt: {t_master_arrival:.2f} ms")
+        label_lines.append(f"Master Δt: {t_master_arrival:.2f} ms ∴ {c*t_master_arrival:.2f} km away")
     else:
         master_back_circle.set_radius(0)
         master_tri_circle.set_radius(0)
@@ -134,7 +136,7 @@ def animate(frame):
     if t >= t_slave_a_arrival:
         slave_a_back_circle.set_radius(dist_slave_a)
         slave_a_tri_circle.set_radius(dist_slave_a)
-        label_lines.append(f"Slave A Δt: {t_slave_a_arrival - t_slave_a_emit:.2f} ms")
+        label_lines.append(f"Slave A Δt: {(t_slave_a_arrival - t_slave_a_emit):.2f} ms ∴ {c*(t_slave_a_arrival - t_slave_a_emit):.2f} km away")
     else:
         slave_a_back_circle.set_radius(0)
         slave_a_tri_circle.set_radius(0)
@@ -143,10 +145,14 @@ def animate(frame):
     if t >= t_slave_b_arrival:
         slave_b_back_circle.set_radius(dist_slave_b)
         slave_b_tri_circle.set_radius(dist_slave_b)
-        label_lines.append(f"Slave B Δt: {t_slave_b_arrival - t_slave_b_emit:.2f} ms")
+        label_lines.append(f"Slave B Δt: {t_slave_b_arrival - t_slave_b_emit:.2f} ms ∴ {c*(t_slave_b_arrival - t_slave_b_emit):.2f} km away")
     else:
         slave_b_back_circle.set_radius(0)
         slave_b_tri_circle.set_radius(0)
+
+    # Annotate when master pulse is received by slaves
+    slave_a_label.set_text("Recv Master" if t >= t_master_to_slave_a else "")
+    slave_b_label.set_text("Recv Master" if t >= t_master_to_slave_b else "")
 
     if label_lines:
         label_lines.append("(dotted = from aircraft, faded = from station)")
@@ -157,7 +163,7 @@ def animate(frame):
         master_circle, slave_a_circle, slave_b_circle,
         master_back_circle, slave_a_back_circle, slave_b_back_circle,
         master_tri_circle, slave_a_tri_circle, slave_b_tri_circle,
-        aircraft_dot, aircraft_label
+        aircraft_dot, aircraft_label, slave_a_label, slave_b_label
     )
 
 # Run animation
