@@ -10,6 +10,8 @@ This project demonstrates how the World War II-era **GEE hyperbolic navigation s
 
 ## 🛰 What is GEE?
 
+[Link to Wikipedia page](https://en.wikipedia.org/wiki/Gee_(navigation)) 
+
 GEE was a **hyperbolic radio navigation system** used by the Royal Air Force during World War II. It allowed aircraft to determine their location by comparing the **time delays between pulses** received from synchronized ground-based radio transmitters.
 
 Unlike systems requiring precise clocks on the aircraft, GEE relied on **differential time measurements** from pulse pairs. It allowed for reasonably accurate positioning even under wartime conditions with limited instrumentation.
